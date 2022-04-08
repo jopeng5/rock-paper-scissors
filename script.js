@@ -1,3 +1,6 @@
+let playerWinCount = 0;
+let computerWinCount = 0;
+
 // Computer makes a choice at random
 function computerPlay(min, max) {
   let randNumber = Math.floor(Math.random() * (max - min + 1) + min);
@@ -16,7 +19,6 @@ function computerPlay(min, max) {
     return computerChoice;
   }
 }
-// Check that computerPlay is functioning as intended: console.log(computerPlay(1, 3));
 
 // Player makes their choice
 function playerPlay() {
@@ -35,12 +37,8 @@ function playerPlay() {
     return playerPlay();
   }
 }
-// Check that playerPlay is functioning as intended: console.log(playerPlay());
 
-let playerWinCount = 0;
-let computerWinCount = 0;
-
-// Play single round of Rock Paper Scissors
+// Execute single round of Rock Paper Scissors
 function playRound(playerSelection, computerSelection) {
   
   if (playerSelection === 'Rock' && computerSelection === 'Paper') {
@@ -69,7 +67,7 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// Play 5-round game of Rock Paper Scissors and announce the winner
+// Execute 5-round game of Rock Paper Scissors and announce the game result
 function game() {
   for (let i = 0; i < 5; i++) {
     playRound(playerPlay(), computerPlay(1,3));
@@ -77,7 +75,7 @@ function game() {
   if (playerWinCount > computerWinCount) {
     console.log(`You win ${playerWinCount} to ${computerWinCount}!`);
   } else if (playerWinCount === computerWinCount) {
-    console.log(`It\'s a tie! Your final score: ${playerWinCount}. Computer\'s final score: ${computerWinCount}.`);
+    console.log(`It\'s a tie! ${playerWinCount} to ${computerWinCount}.`);
   } else {
     console.log(`You lose ${playerWinCount} to ${computerWinCount}!`);
   }
