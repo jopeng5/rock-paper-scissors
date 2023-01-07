@@ -1,6 +1,12 @@
 let playerWinCount = 0;
 let computerWinCount = 0;
 
+let rockButton = document.querySelector('.rock-btn');
+rockButton.addEventListener('click', function () { 
+  let playerChoice = 'Rock';
+  playRound(playerChoice, computerPlay(1,3));
+  });
+
 // Computer makes a choice at random
 function computerPlay(min, max) {
   let randNumber = Math.floor(Math.random() * (max - min + 1) + min);
@@ -20,23 +26,23 @@ function computerPlay(min, max) {
   }
 }
 
-// Player makes their choice
-function playerPlay() {
-  let playerChoice = prompt('Rock, Paper, or Scissors? ', '').toLowerCase();
-  if (playerChoice === 'rock') {
-    console.log(`You chose ${playerChoice[0].toUpperCase() + playerChoice.substring(1)}.`);
-    return 'Rock';
-  } else if (playerChoice === 'paper') {
-    console.log(`You chose ${playerChoice[0].toUpperCase() + playerChoice.substring(1)}.`);
-    return 'Paper';
-  } else if (playerChoice === 'scissors') {
-    console.log(`You chose ${playerChoice[0].toUpperCase() + playerChoice.substring(1)}.`);
-    return 'Scissors';
-  } else {
-    console.log('Sorry, you must choose either Rock, Paper, or Scissors. Please try again!');
-    return playerPlay();
-  }
-}
+// // Player makes their choice
+// function playerPlay() {
+//   let playerChoice = prompt('Rock, Paper, or Scissors? ', '').toLowerCase();
+//   if (playerChoice === 'rock') {
+//     console.log(`You chose ${playerChoice[0].toUpperCase() + playerChoice.substring(1)}.`);
+//     return 'Rock';
+//   } else if (playerChoice === 'paper') {
+//     console.log(`You chose ${playerChoice[0].toUpperCase() + playerChoice.substring(1)}.`);
+//     return 'Paper';
+//   } else if (playerChoice === 'scissors') {
+//     console.log(`You chose ${playerChoice[0].toUpperCase() + playerChoice.substring(1)}.`);
+//     return 'Scissors';
+//   } else {
+//     console.log('Sorry, you must choose either Rock, Paper, or Scissors. Please try again!');
+//     return playerPlay();
+//   }
+// }
 
 // Execute single round of Rock Paper Scissors
 function playRound(playerSelection, computerSelection) {
@@ -67,18 +73,18 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// Execute 5-round game of Rock Paper Scissors and announce the game result
-function game() {
-  for (let i = 0; i < 5; i++) {
-    playRound(playerPlay(), computerPlay(1,3));
-  }
-  if (playerWinCount > computerWinCount) {
-    console.log(`You win ${playerWinCount} to ${computerWinCount}!`);
-  } else if (playerWinCount === computerWinCount) {
-    console.log(`It\'s a tie! ${playerWinCount} to ${computerWinCount}.`);
-  } else {
-    console.log(`You lose ${playerWinCount} to ${computerWinCount}!`);
-  }
-}
+// // Execute 5-round game of Rock Paper Scissors and announce the game result
+// function game() {
+//   for (let i = 0; i < 5; i++) {
+//     playRound(playerPlay(), computerPlay(1,3));
+//   }
+//   if (playerWinCount > computerWinCount) {
+//     console.log(`You win ${playerWinCount} to ${computerWinCount}!`);
+//   } else if (playerWinCount === computerWinCount) {
+//     console.log(`It\'s a tie! ${playerWinCount} to ${computerWinCount}.`);
+//   } else {
+//     console.log(`You lose ${playerWinCount} to ${computerWinCount}!`);
+//   }
+// }
 
-game();
+// game();
