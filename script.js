@@ -1,11 +1,12 @@
 let playerWinCount = 0;
 let computerWinCount = 0;
 
-let rockButton = document.querySelector('.rock-btn');
-rockButton.addEventListener('click', function () { 
-  let playerChoice = 'Rock';
-  playRound(playerChoice, computerPlay(1,3));
-  });
+// Use event delegation on buttons div to get value for playerChoice, then pass playerChoice into playRound
+let buttons = document.querySelector('.btns');
+buttons.addEventListener('click', function (e) { 
+  let playerChoice = e.target.textContent;
+  playRound(playerChoice, computerPlay(1, 3));
+});
 
 // Computer makes a choice at random
 function computerPlay(min, max) {
