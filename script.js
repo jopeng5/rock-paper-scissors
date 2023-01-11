@@ -1,6 +1,23 @@
 let playerWinCount = 0;
 let computerWinCount = 0;
 
+// Display scores and per round results
+let results = document.querySelector('.results');
+let playerScore = document.createElement('div');
+results.appendChild(playerScore);
+playerScore.classList.add('player-score');
+let computerScore = document.createElement('div');
+results.appendChild(computerScore);
+computerScore.classList.add('computer-score');
+let resultText = document.createElement('div');
+results.appendChild(resultText);
+resultText.classList.add('result-text');
+
+// Display initial scores
+playerScore.textContent = playerWinCount;
+computerScore.textContent = computerWinCount;
+
+
 // Use event delegation on buttons div to get value for playerChoice, then pass playerChoice into playRound
 let buttons = document.querySelector('.btns');
 buttons.addEventListener('click', function (e) { 
@@ -49,8 +66,11 @@ function computerPlay(min, max) {
 function playRound(playerSelection, computerSelection) {
   
   if (playerSelection === 'Rock' && computerSelection === 'Paper') {
-    console.log('You lose this round! Paper beats Rock.');
-    return computerWinCount++;
+    let resultText = 'You lose this round! Paper beats Rock.';
+    result.insertAdjacentHTML = ('beforebegin', resultText);
+    computerWinCount++;
+    results.textContent = computerWinCount;
+    
   } else if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
     console.log('You win this round! Rock beats Scissors.');
     return playerWinCount++;
@@ -69,9 +89,10 @@ function playRound(playerSelection, computerSelection) {
   } else if (playerSelection === computerSelection) {
     console.log('This round is a tie!');
   } else {
-    console.log('Something went wrong... try again!');
-    return playRound(playerPlay(), computerPlay(1,3));
+    console.log('Please click on a button to play!');
   }
+
+
 }
 
 // // Execute 5-round game of Rock Paper Scissors and announce the game result
