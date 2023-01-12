@@ -1,21 +1,25 @@
 let playerWinCount = 0;
 let computerWinCount = 0;
+let computerChoice = '';
 
-// Display scores and per round results
+// Scores and results
 let results = document.querySelector('.results');
+
 let playerScore = document.createElement('div');
 results.appendChild(playerScore);
 playerScore.classList.add('player-score');
+let playerResult = `Player: ${playerWinCount}`;
+playerScore.textContent = playerResult;
+
 let computerScore = document.createElement('div');
 results.appendChild(computerScore);
 computerScore.classList.add('computer-score');
+let computerResult = `Computer: ${computerWinCount}`;
+computerScore.textContent = computerResult;
+
 let resultText = document.createElement('div');
 results.appendChild(resultText);
 resultText.classList.add('result-text');
-
-// Display initial scores
-playerScore.textContent = playerWinCount;
-computerScore.textContent = computerWinCount;
 
 
 // Use event delegation on buttons div to get value for playerChoice, then pass playerChoice into playRound
@@ -28,7 +32,6 @@ buttons.addEventListener('click', function (e) {
 // Computer makes a choice at random
 function computerPlay(min, max) {
   let randNumber = Math.floor(Math.random() * (max - min + 1) + min);
-  let computerChoice;
   if (randNumber === 1) {
     computerChoice = 'Rock';
     console.log(`The computer chose ${computerChoice}.`);
@@ -62,21 +65,31 @@ function computerPlay(min, max) {
 //   }
 // }
 
+function updateScore(score) {
+  if(score === 'computer') {
+    computerWinCount++;
+
+  }
+}
+
 // Execute single round of Rock Paper Scissors
 function playRound(playerSelection, computerSelection) {
-  
+  let computerChoiceText = `The computer chose ${computerChoice}. `;
+  let winner = '';
   if (playerSelection === 'Rock' && computerSelection === 'Paper') {
-    let resultText = 'You lose this round! Paper beats Rock.';
-    result.insertAdjacentHTML = ('beforebegin', resultText);
-    computerWinCount++;
-    results.textContent = computerWinCount;
-    
+    let roundResult = 'You lose this round! Paper beats Rock.';
+    resultText.textContent = computerChoiceText + roundResult;
+    winner = 'computer';
   } else if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
-    console.log('You win this round! Rock beats Scissors.');
-    return playerWinCount++;
+    let roundResult = 'You win this round! Rock beats Scissors.';
+    resultText.textContent = computerChoiceText + roundResult;
+    playerWinCount++;
+    playerScore.textContent = playerWinCount;
   } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
-    console.log('You win this round! Paper beats Rock.');
-    return playerWinCount++;
+    let roundResult = 'You win this round! Paper beats Rock.';
+    resultText.textContent = computerChoiceText + roundResult;
+    playerWinCount++;
+    playerScore.textContent = playerWinCount;
   } else if (playerSelection === 'Paper' && computerSelection === 'Scissors') {
     console.log('You lose this round! Scissors beats Paper.');
     return computerWinCount++;
@@ -91,8 +104,7 @@ function playRound(playerSelection, computerSelection) {
   } else {
     console.log('Please click on a button to play!');
   }
-
-
+  updateScore(winner);
 }
 
 // // Execute 5-round game of Rock Paper Scissors and announce the game result

@@ -1,23 +1,25 @@
 .results {
   display: grid;
   min-height: 200px;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   border: 1px solid black;
 }
 
 .player-score {
-  border: 1px solid black;
-  background-color: aquamarine;
+  grid-area: 1 / 2 / 2 / 3;
+  background-color: lightslategray;
   color: white;
 }
 
 .computer-score {
-  border: 1px solid black;
-  background-color: blueviolet;
+  grid-area: 1 / 3 / 2 / 4;
+  background-color: lightskyblue;
   color: white;
 }
 
 .result-text {
-  background-color: pink;
-  grid-area: 2 / 1 / 3 / 3;
+  grid-area: 2 / 2 / 3 / 4;
+  background-color: lightseagreen;
+  color: white;
 }
