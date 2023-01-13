@@ -1,6 +1,7 @@
 let playerWinCount = 0;
 let computerWinCount = 0;
 let computerChoice = '';
+let winner = '';
 
 // Scores and results
 let results = document.querySelector('.results');
@@ -8,14 +9,12 @@ let results = document.querySelector('.results');
 let playerScore = document.createElement('div');
 results.appendChild(playerScore);
 playerScore.classList.add('player-score');
-let playerResult = `Player: ${playerWinCount}`;
-playerScore.textContent = playerResult;
+playerScore.textContent = `Player: ${playerWinCount}`;
 
 let computerScore = document.createElement('div');
 results.appendChild(computerScore);
 computerScore.classList.add('computer-score');
-let computerResult = `Computer: ${computerWinCount}`;
-computerScore.textContent = computerResult;
+computerScore.textContent = `Computer: ${computerWinCount}`;
 
 let resultText = document.createElement('div');
 results.appendChild(resultText);
@@ -26,7 +25,17 @@ resultText.classList.add('result-text');
 let buttons = document.querySelector('.btns');
 buttons.addEventListener('click', function (e) { 
   let playerChoice = e.target.textContent;
-  playRound(playerChoice, computerPlay(1, 3));
+  if (computerWinCount < 5 && playerWinCount < 5) {
+    playRound(playerChoice, computerPlay(1, 3));
+  }
+  else {
+    if (computerWinCount === 5) {
+      resultText.textContent = 'Computer wins! Refresh to play again!';
+    }
+    else {
+      resultText.textContent = 'You win! Refresh to play again!';
+    }
+  } 
 });
 
 // Computer makes a choice at random
@@ -34,15 +43,12 @@ function computerPlay(min, max) {
   let randNumber = Math.floor(Math.random() * (max - min + 1) + min);
   if (randNumber === 1) {
     computerChoice = 'Rock';
-    console.log(`The computer chose ${computerChoice}.`);
     return computerChoice;
   } else if (randNumber === 2) {
     computerChoice = 'Paper';
-    console.log(`The computer chose ${computerChoice}.`);
     return computerChoice;
   } else {
     computerChoice = 'Scissors';
-    console.log(`The computer chose ${computerChoice}.`);
     return computerChoice;
   }
 }
@@ -65,17 +71,21 @@ function computerPlay(min, max) {
 //   }
 // }
 
+
 function updateScore(score) {
   if(score === 'computer') {
     computerWinCount++;
-
+    computerScore.textContent = `Computer: ${computerWinCount}`;
+  }
+  else if (score === 'player') {
+    playerWinCount++;
+    playerScore.textContent = `Player: ${playerWinCount}`;
   }
 }
 
 // Execute single round of Rock Paper Scissors
 function playRound(playerSelection, computerSelection) {
   let computerChoiceText = `The computer chose ${computerChoice}. `;
-  let winner = '';
   if (playerSelection === 'Rock' && computerSelection === 'Paper') {
     let roundResult = 'You lose this round! Paper beats Rock.';
     resultText.textContent = computerChoiceText + roundResult;
@@ -83,29 +93,36 @@ function playRound(playerSelection, computerSelection) {
   } else if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
     let roundResult = 'You win this round! Rock beats Scissors.';
     resultText.textContent = computerChoiceText + roundResult;
-    playerWinCount++;
+    winner = 'player';
     playerScore.textContent = playerWinCount;
   } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
     let roundResult = 'You win this round! Paper beats Rock.';
     resultText.textContent = computerChoiceText + roundResult;
-    playerWinCount++;
-    playerScore.textContent = playerWinCount;
+    winner = 'player';
   } else if (playerSelection === 'Paper' && computerSelection === 'Scissors') {
-    console.log('You lose this round! Scissors beats Paper.');
-    return computerWinCount++;
+    let roundResult = 'You lose this round! Scissors beats Paper.';
+    resultText.textContent = computerChoiceText + roundResult;
+    winner = 'computer';
   } else if (playerSelection === 'Scissors' && computerSelection === 'Rock') {
-    console.log('You lose this round! Rock beats Scissors.');
-    return computerWinCount++;
+    let roundResult = 'You lose this round! Rock beats Scissors.';
+    resultText.textContent = computerChoiceText + roundResult;
+    winner = 'computer';
   } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
-    console.log('You win this round! Scissors beats Paper.');
-    return playerWinCount++;
+    let roundResult = 'You win this round! Scissors beats Paper.';
+    resultText.textContent = computerChoiceText + roundResult;
+    winner = 'player';
   } else if (playerSelection === computerSelection) {
-    console.log('This round is a tie!');
+    resultText.textContent = 'This round is a tie!';
+    winner = '';
   } else {
-    console.log('Please click on a button to play!');
+    resultText.textContent = 'Please click on a button to play!';
+    winner = '';
   }
   updateScore(winner);
 }
+
+
+
 
 // // Execute 5-round game of Rock Paper Scissors and announce the game result
 // function game() {
