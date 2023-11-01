@@ -1,14 +1,30 @@
-body {
-  gap: 1px;
+div {
   border: 1px solid black;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
 }
-/* .player-choice,
-.player-score,
-.computer-choice,
-.computer-score,
-.results {
-  
-} */
+
+.btns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: center;
+}
+
+.rbtn,
+.pbtn,
+.sbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:#ef9484;
+  height: 25px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
 .results {
   display: grid;
   min-height: 200px;

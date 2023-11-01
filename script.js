@@ -7,7 +7,6 @@ let results = document.querySelector('.results');
 
 let playerWinCount = 0;
 let computerWinCount = 0;
-let winner = '';
 
 buttons.addEventListener('click', (e) => { 
   let playerPlay = e.target.textContent;
@@ -18,7 +17,7 @@ function playRound(pChoice, cChoice) {
   playerChoice.textContent = `Your Choice: ${pChoice}`;
   computerChoice.textContent = `Computer's Choice: ${cChoice}`;
   let roundResult = '';
-
+  let winner = '';
   if (pChoice === 'Rock' && cChoice === 'Paper') {
     roundResult = 'You lose this round! Paper beats Rock.';
     winner = 'computer';
@@ -61,6 +60,9 @@ function updateScore(winner) {
   else if (winner === 'player' && playerWinCount < 5 && computerWinCount < 5) {
     playerScore.textContent = `Your Score: ${playerWinCount}`;
   }
+  else if (winner === '' && playerWinCount < 5 && computerWinCount < 5) {
+    results.textContent = `This round is a tie!`;
+  }
   else if (winner === 'player' && playerWinCount === 5) {
     playerScore.textContent = `Your Score: ${playerWinCount}`;
     results.textContent = 'You win! Refresh to play again!'; 
@@ -68,6 +70,9 @@ function updateScore(winner) {
   else if (winner === 'computer' && computerWinCount === 5) {
     computerScore.textContent = `Computer's Score: ${computerWinCount}`;
     results.textContent = 'Computer wins! Refresh to play again!';
+  }
+  else if (computerWinCount > 5 || playerWinCount > 5) {
+    results.textContent = 'Game over! Please refresh to play again! :)';
   }
 }
 
