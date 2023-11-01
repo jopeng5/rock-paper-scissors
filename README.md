@@ -1,7 +1,7 @@
 # Rock Paper Scissors
 
 ### Description
-a console-based, 5-round game of Rock Paper Scissors
+a 5-round game of Rock Paper Scissors
 
 ### Lessons Learned
 * How to:
