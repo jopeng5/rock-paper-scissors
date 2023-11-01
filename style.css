@@ -1,25 +1,34 @@
+body {
+  gap: 1px;
+  border: 1px solid black;
+}
+/* .player-choice,
+.player-score,
+.computer-choice,
+.computer-score,
+.results {
+  
+} */
 .results {
   display: grid;
   min-height: 200px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  border: 1px solid black;
+  grid-area: 2 / 2 / 3 / 4;
+  background-color: #ef9484;
+  color: #3e2c14;
 }
 
+.player-choice, 
 .player-score {
   grid-area: 1 / 2 / 2 / 3;
-  background-color: lightslategray;
-  color: white;
+  background-color: #E3C567;
+  color: #3e2c14;
 }
 
+.computer-choice,
 .computer-score {
-  grid-area: 1 / 3 / 2 / 4;
-  background-color: lightskyblue;
-  color: white;
-}
-
-.result-text {
-  grid-area: 2 / 2 / 3 / 4;
-  background-color: lightseagreen;
-  color: white;
+  grid-area: 1 / 2 / 2 / 3;
+  background-color: #D9AE61;
+  color: #3e2c14;
 }
